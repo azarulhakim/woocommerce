@@ -130,8 +130,8 @@ final class WC_Cart_Session {
 
 			} elseif ( ! $product->is_purchasable() ) {
 				$update_cart_session = true;
-				/* translators: %s: product name */
-				wc_add_notice( sprintf( __( '%s has been removed from your cart because it can no longer be purchased. Please contact us if you need assistance.', 'woocommerce' ), $product->get_name() ), 'error' );
+				/* translators: %1$s: product name. %2$s reason why */
+				wc_add_notice( sprintf( __( '%s has been removed from your cart. %s Please contact us if you need assistance.', 'woocommerce' ), $product->get_name(), $product->get_unable_to_purchase_message() ), 'error' );
 				do_action( 'woocommerce_remove_cart_item_from_session', $key, $values );
 
 			} elseif ( ! empty( $values['data_hash'] ) && ! hash_equals( $values['data_hash'], wc_get_cart_item_data_hash( $product ) ) ) { // phpcs:ignore PHPCompatibility.PHP.NewFunctions.hash_equalsFound
